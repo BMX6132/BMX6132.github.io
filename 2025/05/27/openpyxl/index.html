@@ -72,7 +72,7 @@
         document.head.appendChild(link)
       }),
       addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!ture && key.startsWith('pjax')) return
+        if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
         globalFn[key] = globalFn[key] || {}
         globalFn[key][name || Object.keys(globalFn[key]).length] = fn
@@ -390,7 +390,7 @@
   const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
   window.pjax = new Pjax({
-    elements: 'a:not([target="_blank"])',
+    elements: 'a:not([target="_blank"]):not([href="/music/"])',
     selectors: pjaxSelectors,
     cacheBust: false,
     analytics: false,
@@ -429,7 +429,7 @@
 
   document.addEventListener('pjax:error', e => {
     if (e.request.status === 404) {
-      const usePjax = ture
+      const usePjax = true
       false 
         ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
         : window.location.href = e.request.responseURL
