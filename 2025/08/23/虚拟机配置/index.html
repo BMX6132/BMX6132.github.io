@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>VMware_ubuntu���á���freshman������ | LNexaminee's world</title><meta name="author" content="LNexaminee"><meta name="copyright" content="LNexaminee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="VMware_ubuntu���á���freshman������VMware����VMware�൱��������Ŀ��ӣ���������Ϊ����װ�ã��Ƚϳ��õĳ���vm���⻹��VBOX�ȡ� ���ڹ��������˺þã����������������ֳ��ֳ���ֱ��������������˵ֱ����������ע��Ҫ��ѡ����·�������ҿ��Ի�һ��">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMware_ubuntu���á���freshman������">
+<meta property="og:url" content="http://bmx6132.github.io/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="LNexaminee&#39;s world">
+<meta property="og:description" content="VMware_ubuntu���á���freshman������VMware����VMware�൱��������Ŀ��ӣ���������Ϊ����װ�ã��Ƚϳ��õĳ���vm���⻹��VBOX�ȡ� ���ڹ��������˺þã����������������ֳ��ֳ���ֱ��������������˵ֱ����������ע��Ҫ��ѡ����·�������ҿ��Ի�һ��">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bmx6132.github.io/img/les.jpg">
+<meta property="article:published_time" content="2025-08-22T18:11:26.560Z">
+<meta property="article:modified_time" content="2025-08-22T18:10:56.902Z">
+<meta property="article:author" content="LNexaminee">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bmx6132.github.io/img/les.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "VMware_ubuntu���á���freshman������",
+  "url": "http://bmx6132.github.io/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/",
+  "image": "https://bmx6132.github.io/img/les.jpg",
+  "datePublished": "2025-08-22T18:11:26.560Z",
+  "dateModified": "2025-08-22T18:10:56.902Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "LNexaminee",
+      "url": "https://bmx6132.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://bmx6132.github.io/img/les.jpg"><link rel="canonical" href="http://bmx6132.github.io/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 4 || hour >= 5
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'VMware_ubuntu���á���freshman������',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bmx6132.github.io/img/les.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://bmx6132.github.io/img/title.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://bmx6132.github.io/img/les.jpg" alt="Logo"><span class="site-name">LNexaminee's world</span></a><a class="nav-page-title" href="/"><span class="site-name">VMware_ubuntu���á���freshman������</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">VMware_ubuntu���á���freshman������</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-08-22T18:11:26.560Z" title="Created 2025-08-23 02:11:26">2025-08-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-22T18:10:56.902Z" title="Updated 2025-08-23 02:10:56">2025-08-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="VMware-ubuntu���a���freshman������"><a href="#VMware-ubuntu���a���freshman������" class="headerlink" title="VMware_ubuntu���á���freshman������"></a>VMware_ubuntu���á���freshman������</h1><h2 id="VMware����"><a href="#VMware����" class="headerlink" title="VMware����"></a>VMware����</h2><p>VMware�൱��������Ŀ��ӣ���������Ϊ����װ�ã��Ƚϳ��õĳ���vm���⻹��VBOX�ȡ�</p>
+<p>���ڹ��������˺þã����������������ֳ��ֳ���ֱ��������<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/0.png" alt="0"><br>������˵ֱ������<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/1.png" alt="1"><br>����ע��Ҫ��ѡ����·�������ҿ��Ի�һ����ַ���������c��սʿ����û˵���������ֱ��һ·next�Ϳ�����<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/2.png" alt="2"><br>��������</p>
+<h2 id="VMware-ubuntu��VMware������C����ʲo��"><a href="#VMware-ubuntu��VMware������C����ʲo��" class="headerlink" title="VMware_ubuntu��VMware������Ȼ����ʲô��"></a>VMware_ubuntu��VMware������Ȼ����ʲô��</h2><p>��������һ��<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04/">�廪Դ�ľ���</a>����Ϊ���õľ���22.04�汾����Ȼ�������Ҫ���°汾������һ��汾�Ŀ���ѡ��վ��һҳ������<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/3.png" alt="3"><br>���������صĹ����н���һ�¾�����ʲô���󲨵������ǣ�������������Ķ������ܶ඼��Ҫ��ǽ��ȡ������ͽ������Щ���޷���ɫ�������ֹܹ�����Դ��ȫ�����⣨�Ͼ����Ǳ��������Щ�������Ӹɻ��£�</p>
+<h2 id="��VMware��ubuntu���VMware-ubuntu"><a href="#��VMware��ubuntu���VMware-ubuntu" class="headerlink" title="��VMware��ubuntu���VMware_ubuntu"></a>��VMware��ubuntu���VMware_ubuntu</h2><p>��VMwareȻ��<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/4.png" alt="4"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/5.png" alt="5"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/6.png" alt="6"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/7.png" alt="7"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/8.png" alt="8"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/9.png" alt="9"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/10.png" alt="10"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/11.png" alt="11"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/12.png" alt="12"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/13.png" alt="13"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/14.png" alt="14"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/15.png" alt="15"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/16.png" alt="16"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/19.png" alt="19"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/17.png" alt="17"><br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/18.png" alt="18"><br>VMware_ubuntu������������ú���</p>
+<h2 id="��������"><a href="#��������" class="headerlink" title="��������"></a>��������</h2><ul>
+<li><p>python</p>
+<p>���նˣ������½��ǾŸ������ң����������´���</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install python3</span><br></pre></td></tr></table></figure>
+<p>�����һ�£�����python3����python������û��������</p>
+</li>
+<li><p>ssh����vscode��ѡ����ʹ�ã�<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/remote-ssh.png" alt="remote-ssh"><br>�����vscode��Ѱ������������װ<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/co.png" alt="co"><br>֮������ssh:&#x2F;&#x2F;�����������@ip�������ӣ�����������־����ն˶������Ǹ���ĸ<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/bash.png" alt="bash"><br>IP������������ն�������</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install net-tools</span><br><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+<p>�ҵ�����������־���ip<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/ifconfig.png" alt="ifconfig"><br>Ȼ������������ն�������</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt install openssh-server -y</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> ssh</span><br></pre></td></tr></table></figure>
+<p>����װssh���ҿ���<br><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/last.png" alt="last"><br>������������½ǵ�ͼ�꣬ע�⹤��������ʾ���Ϳ���������</p>
+<p>��ô��ʱ����õ���һ����������ubuntu��vscode</p>
+</li>
+<li><p>pwntools<br>�ն�����</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential</span><br><span class="line"><span class="built_in">sudo</span> pip3 install pwntools</span><br></pre></td></tr></table></figure>
+<p>ע�⣬Ҫ��֤�������״̬���ã���������y&#x2F;n�����ֱ��ѡ��y�Ϳ�����</p>
+</li>
+<li><p>gdb&amp;gcc<br>�ն�����</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install gdb</span><br></pre></td></tr></table></figure>
+<p>gcc����Ҫ���أ�ֱ���þͿ����ˣ�ubuntu�Դ�</p>
+</li>
+<li><p>pwndbg���</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/BMX6132/pic_public/refs/heads/main/pwndbg.png" alt="pwndbg"><br>�������ϱ�ʾ֤���������</p>
+</li>
+</ul>
+<h2 id="�������"><a href="#�������" class="headerlink" title="�������"></a>�������</h2><p>���flag�����ļ�������</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://bmx6132.github.io/">LNexaminee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://bmx6132.github.io/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/">http://bmx6132.github.io/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://bmx6132.github.io/img/les.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/05/27/openpyxl/" title="OPENPYXL"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">OPENPYXL</div></div><div class="info-2"><div class="info-item-1">一个强大的Excel读写库 前言 虽然总是在吹“诶呀c是最好的语言”，“诶呀c就是牛逼”，“python和Java都是c写的，go也是c写的（其实作者也不知道是不是c写的），c++也是基于c的创作”（当然作者也不知道是不是c干的事），但究其原因就是因为作者首先学的c，但学完发现c其实啥也干不来（当然我是说相比于其他语言），心里十分的不平衡 所以today，出一期openpyxl库的使用教程 这个库主要是面向excel表格而设计的，同功能的库还有pandas，有兴趣的小伙伴可以去研究一下一下是二者的大体区别    功能&#x2F;库 openpyxl pandas    主要用途 精细控制Excel 文件数据分析和批量处理   支持格式 .xlsx .xlsx,.xls,.csv 等   内存效率 中等 高（对于数据分析）   单元格级操作 优秀 有限   公式处理 支持读取和写入 主要读取计算结果   图表操作 支持 不支持   学习曲线 中等 较低（对数据分析师）   依赖关系 纯Python 依赖 NumPy...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bmx6132.github.io/img/les.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">LNexaminee</div><div class="author-info-description">zypc24</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/bmx6132"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/bmx6132" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1603384860@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">❤❤小杨永露❤❤</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VMware-ubuntu%EF%BF%BD%EF%BF%BD%EF%BF%BDa%EF%BF%BD%EF%BF%BD%EF%BF%BDfreshman%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.</span> <span class="toc-text">VMware_ubuntu���á���freshman������</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VMware%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.1.</span> <span class="toc-text">VMware����</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VMware-ubuntu%EF%BF%BD%EF%BF%BDVMware%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDC%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%B2o%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.2.</span> <span class="toc-text">VMware_ubuntu��VMware������Ȼ����ʲô��</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BF%BD%EF%BF%BDVMware%EF%BF%BD%EF%BF%BDubuntu%EF%BF%BD%EF%BF%BD%EF%BF%BDVMware-ubuntu"><span class="toc-number">1.3.</span> <span class="toc-text">��VMware��ubuntu���VMware_ubuntu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.4.</span> <span class="toc-text">��������</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="toc-number">1.5.</span> <span class="toc-text">�������</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/23/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE/" title="VMware_ubuntu���á���freshman������">VMware_ubuntu���á���freshman������</a><time datetime="2025-08-22T18:11:26.560Z" title="Created 2025-08-23 02:11:26">2025-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/27/openpyxl/" title="OPENPYXL">OPENPYXL</a><time datetime="2025-05-27T10:47:06.360Z" title="Created 2025-05-27 18:47:06">2025-05-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By LNexaminee</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/music/"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
