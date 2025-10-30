@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>快速入门爬虫 | LNexaminee's world</title><meta name="author" content="LNexaminee"><meta name="copyright" content="LNexaminee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="快速入门爬虫前言本人正在学习人工智能，当然，除了为做ctf比赛ai部分的题意外，也是想自己搞点小玩意玩玩，而学习爬虫又是训练模型时获取数据的不二手段，那么以下开启作者的学习部分 爬虫第一步——获取网站内容通过python的requests库，用代码实现获取网页内容，也就是发送http请求 1pip install requests 首先通过以上命令来拉取requests库，然后我们来学习http常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速入门爬虫">
+<meta property="og:url" content="http://bmx6132.github.io/2025/10/30/Crawling/index.html">
+<meta property="og:site_name" content="LNexaminee&#39;s world">
+<meta property="og:description" content="快速入门爬虫前言本人正在学习人工智能，当然，除了为做ctf比赛ai部分的题意外，也是想自己搞点小玩意玩玩，而学习爬虫又是训练模型时获取数据的不二手段，那么以下开启作者的学习部分 爬虫第一步——获取网站内容通过python的requests库，用代码实现获取网页内容，也就是发送http请求 1pip install requests 首先通过以上命令来拉取requests库，然后我们来学习http常">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bmx6132.github.io/img/les.jpg">
+<meta property="article:published_time" content="2025-10-30T04:49:38.510Z">
+<meta property="article:modified_time" content="2025-10-30T04:50:06.347Z">
+<meta property="article:author" content="LNexaminee">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bmx6132.github.io/img/les.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "快速入门爬虫",
+  "url": "http://bmx6132.github.io/2025/10/30/Crawling/",
+  "image": "https://bmx6132.github.io/img/les.jpg",
+  "datePublished": "2025-10-30T04:49:38.510Z",
+  "dateModified": "2025-10-30T04:50:06.347Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "LNexaminee",
+      "url": "https://bmx6132.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://bmx6132.github.io/img/les.jpg"><link rel="canonical" href="http://bmx6132.github.io/2025/10/30/Crawling/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 4 || hour >= 5
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '快速入门爬虫',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://bmx6132.github.io/img/les.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://bmx6132.github.io/img/title.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="https://bmx6132.github.io/img/les.jpg" alt="Logo"><span class="site-name">LNexaminee's world</span></a><a class="nav-page-title" href="/"><span class="site-name">快速入门爬虫</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">快速入门爬虫</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-10-30T04:49:38.510Z" title="Created 2025-10-30 12:49:38">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-10-30T04:50:06.347Z" title="Updated 2025-10-30 12:50:06">2025-10-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="快速入门爬虫"><a href="#快速入门爬虫" class="headerlink" title="快速入门爬虫"></a>快速入门爬虫</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本人正在学习人工智能，当然，除了为做ctf比赛ai部分的题意外，也是想自己搞点小玩意玩玩，而学习爬虫又是训练模型时获取数据的不二手段，那么以下开启作者的学习部分</p>
+<h2 id="爬虫第一步——获取网站内容"><a href="#爬虫第一步——获取网站内容" class="headerlink" title="爬虫第一步——获取网站内容"></a>爬虫第一步——获取网站内容</h2><p>通过python的requests库，用代码实现获取网页内容，也就是发送http请求</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
+<p>首先通过以上命令来拉取requests库，然后我们来学习http常见的请求方法</p>
+<ul>
+<li>GET<ul>
+<li>作用于获得数据，比如我们浏览某个网页，浏览器就会向服务器发送GET请求得到网页内容</li>
+</ul>
+</li>
+<li>POST<ul>
+<li>作用于创建数据，比如我们注册账号，浏览器就会向服务器发送POST请求来存储我们的注册信息<br>以下列举一个完整的http请求例子</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST/user/info?new_user=true HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.example.com</span><br><span class="line">User-Agent:curl/7.77.0</span><br><span class="line">Accept:*/*</span><br><span class="line"></span><br><span class="line">&#123;&quot;username&quot;:&quot;LNexaminee&quot;,</span><br><span class="line">&quot;blog&quot;:&quot;bmx6132.github.io&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>而以上请求分为三部分</p>
+<ul>
+<li>请求行<ul>
+<li><pre><code class="language-http">POST/user/info?new_user=true HTTP/1.1
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* post为方法类型</span><br><span class="line">* /user/info是资源路径</span><br><span class="line">  * 资源路径表示你要访问服务器的哪个资源，就比如以下网址：</span><br><span class="line">      ~~~http </span><br><span class="line">      news.4399.com/zmxy6/search.php?q=%B7%E2&amp;start=3</span><br></pre></td></tr></table></figure>
+    &gt; 第一个/之前的news.4399.com就是资源路径的根，之后的/zmxy6/search就是要访问的资源的路径，而?后面的q=%B7%E2&amp;start=3就是查询参数，可以传递个服务器额外的信息，不同的信息之间用&amp;来链接，就比如q=%B7%E2，q是query的缩写，%B7%E2是url编码之后的产物，也就是说用户要查询 **%B7%E2** 这个东西解码之后的内容，start=3说明从第3条搜索结果开始显示
+</code></pre>
+</li>
+<li><p>HTTP&#x2F;1.1是协议版本，也就是http协议的版本，如HTTP&#x2F;1.0 HTTP&#x2F;2.0 HTTP&#x2F;0.9</p>
+</li>
+</ul>
+</li>
+<li>请求头<ul>
+<li><pre><code class="language-http">Host: www.example.com
+User-Agent:curl/7.77.0
+Accept:*/*
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  * host指的是主机域名，他与请求行中的资源路径在一起可以组成完成的网址，如上述的news.4399.com</span><br><span class="line">  * user—agent用来告诉服务器客户端的相关信息，比如请求是浏览器发出来的还是其他东西发出来的，类型是什么，版本是什么（请求如果是curl命令行发出的就是curl/7.77.0，Requests就是python_Requests/2.25.1啥的）</span><br><span class="line">  * Accept是在告诉服务器客户端想接收的响应数据是什么类型的*/*就是啥类型都可以，来者不拒</span><br><span class="line">* 请求体</span><br><span class="line">  * ~~~http </span><br><span class="line">    &#123;&quot;username&quot;:&quot;LNexaminee&quot;,</span><br><span class="line">    &quot;blog&quot;:&quot;bmx6132.github.io&quot;&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li>请求体中是客服端传输给服务器的任意数据，当然get方法的请求体一般是空的，原因请见上述get和post之间的关系</li>
+</ul>
+</li>
+</ul>
+<p>而在服务器接收到请求之后，也会进行响应，也就是http响应下面同样举一个例子</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Mon, 25 Feb 2025 14:15:06 GMT</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html; charset=utf-8</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>BMX<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>响应行<ul>
+<li><pre><code class="language-http">HTTP/1.1 200 OK
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  * 响应行包括协议版本（HTTP/1.1），状态码（200），状态信息（OK）以下列举一些常见的状态信息</span><br><span class="line"></span><br><span class="line">    |状态码&amp;状态信息|意义</span><br><span class="line">    |:---:|:---:</span><br><span class="line">    |200 OK|客户端请求成功</span><br><span class="line">    |301 Moved Permanently|资源被永久移动到新地址</span><br><span class="line">    |400 Bad Request|客户端不能被服务器所理解</span><br><span class="line">    |401 Unauthorized|请求未经授权</span><br><span class="line">    |403 Forbidden|服务器拒绝提供服务</span><br><span class="line">    |404 Not Found|请求资源不存在</span><br><span class="line">    |418 I&#x27;m a teatop|反爬虫</span><br><span class="line">    |429|请求次数过多</span><br><span class="line">    |500 Internal Server Error|服务器发生不可预期的错误</span><br><span class="line">    |503 Server Unavailable|服务器当前不能处理客户端的请求</span><br><span class="line">* 响应头</span><br><span class="line">  * ~~~http </span><br><span class="line">    Date: Mon, 25 Feb 2025 14:15:06 GMT</span><br><span class="line">    Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li>响应头包含一些告诉客户端的信息，如date日期，content-type告诉用户返回的内容格式以及编码形式</li>
+</ul>
+</li>
+<li>响应体<ul>
+<li><pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;head&gt;&lt;title&gt;首页&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;BMX&lt;/h1&gt;&lt;p&gt;hello&lt;/p&gt;&lt;/body&gt;
+&lt;/html&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  * 整体来看，响应体其实就是服务器想给客户端显示的数据内容，以上就是一个html格式的回显</span><br><span class="line"></span><br><span class="line">那么了解了以上信息之后，我们开始正式使用python来进行http请求</span><br><span class="line">~~~python</span><br><span class="line">import requests</span><br><span class="line">response=requests.get(&quot;https://www.4399.com/&quot;)#库函数get完成http请求</span><br><span class="line">print(response)#注意类</span><br><span class="line">print(response.status_code)#查询状态信息</span><br></pre></td></tr></table></figure>
+获得以下输出
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Response [200]&gt;</span><br><span class="line">200</span><br></pre></td></tr></table></figure>
+<p>可以看到状态码为200，说明请求成功，而在写代码的过程中，为了更好的纠错，提高代码的可维护性和鲁棒性，可以加上以上字段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> response.status_code&gt;=<span class="number">400</span> <span class="keyword">and</span> response.status_code&lt;<span class="number">500</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;客户端错误&quot;</span>)</span><br><span class="line">  exit()</span><br><span class="line"><span class="keyword">elif</span> response.status_code&gt;=<span class="number">500</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;服务器错误&quot;</span>)</span><br><span class="line">  exit()</span><br></pre></td></tr></table></figure>
+<p>亦或者</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> response.ok:</span><br><span class="line">  <span class="built_in">print</span>(response.text)<span class="comment">#获取响应体内容</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&quot;请求错误&quot;</span>)</span><br><span class="line">  exit()</span><br></pre></td></tr></table></figure>
+<p>但是实操的同学又发现了问题就是有的时候，你的终端会显示如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(response.text)</span><br><span class="line">    ~~~~~^^^^^^^^^^^^^^^</span><br><span class="line">UnicodeEncodeError: <span class="string">&#x27;gbk&#x27;</span> codec can<span class="string">&#x27;t encode character &#x27;</span>\xd0<span class="string">&#x27; in position 313: illegal multibyte sequence</span></span><br></pre></td></tr></table></figure>
+<p>以上内容是因为在windows环境下，你的编码形式并非utf-8而是gbk，所以推荐加上以上内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf8&#x27;</span>)<span class="comment">#改变标准输出的默认编码</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://books.toscrape.com/">这里是一个专门练习爬虫的网站，可以把作者恶趣味的4399改成这个</a><br>but，话又说回来，如果我们单纯爬取信息然后留下python的痕迹太高调了，所以我们可以用以下方式来伪装我们的请求头</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">headers=&#123;<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0(Windows NT 10.0: Win64; x64)&quot;</span>&#125;</span><br><span class="line"><span class="comment">#注意，这是一个字典类型的变量</span></span><br></pre></td></tr></table></figure>
+<p>那么下面实战一下——用python来获取豆瓣评分top250的电影（相当于F12）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">douban=requests.get(<span class="string">&quot;http://movie.douban.com/top250&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(douban)</span><br></pre></td></tr></table></figure>
+<p>但很不幸，我们发现他的返回值是418，也就是他不吃我们Mozilla&#x2F;5.0(Windows NT 10.0: Win64; x64)这套，那我们应该把头改成什么才能绕过呢<br>答案是去网站里抄答案<br><img src="/" alt="方法"><br>点击结束之后在右侧找到user-agent,之后把后面的东西全部复制下来填在head后面如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">head=&#123;<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0&quot;</span>&#125;</span><br><span class="line">douban=requests.get(<span class="string">&quot;http://movie.douban.com/top250&quot;</span>,headers=head)</span><br><span class="line"><span class="built_in">print</span>(douban.text)</span><br></pre></td></tr></table></figure>
+<p>就可以美美爬取网站啦</p>
+<h2 id="爬虫第二步——解析网页内容"><a href="#爬虫第二步——解析网页内容" class="headerlink" title="爬虫第二步——解析网页内容"></a>爬虫第二步——解析网页内容</h2><p>用python的Beautiful soup库来进行html网页解析</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install bs4</span><br></pre></td></tr></table></figure>
+<p>但在用工具之前，我们还是要学习一下html文本，至少要基本懂得他的结构原理</p>
+<p>首先我们要了解到，一个网站有三大要素：</p>
+<ul>
+<li>HTML<ul>
+<li>定义网页的结构和信息</li>
+</ul>
+</li>
+<li>CSS<ul>
+<li>定义网页的样式</li>
+</ul>
+</li>
+<li>JavaScript<ul>
+<li>定义网页和用户的交互逻辑<br>而爬虫是在跟网页的数据信息打交道，所以我们着眼于HTML</li>
+</ul>
+</li>
+</ul>
+<p>以下是一个最简单的HTML语句</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>每个被&lt;&gt;包括的内容都是一个标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">HTML</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>用于告知浏览器这个文件类型是一个HTML文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>没有斜杠开头的是起始标签，有斜杠开头的是终止标签</p>
+<p>而html文件也可以被看作是一个文件夹，其实标签可以被认为是这个文件夹的根目录，其他的所有元素都要被放置于这个目录之下，也就是在起始标签和终止标签之内</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>text<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上是一个实例，body是一个文件的主体部分，h1是一级标题，p是文本段落用于换行，有点md的感觉，这么看其实他也挺工整的对吧。。。</p>
+<p>以上就先展示他的基本原理，更多内容读者可以自行去寻找学习资料，因为毕竟我们的侧重点是爬虫而不是web开发，嘿嘿。</p>
+<p>那么下面我们就讲解如何用Beautiful soup来解析HTML的内容</p>
+<p>首先引入库函数然后将爬取到的html格式信息发入bs的架构中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">soup=BeautifulSoup(douban.text,<span class="string">&quot;html.parser&quot;</span>)<span class="comment">#将上一步我们爬到的东西传入beautifulsoup这个架构中，并且指定编译器</span></span><br></pre></td></tr></table></figure>
+<p>而beautifulsoup会把我们的HTML构建成一个像树一样的数据结构如下图<br><img src="/" alt="htmltosoup"><br>所以你可以理解为目前soup这个对象就好像你的文件夹一样，下面我们来看看他的特性和方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(soup.p,soup.img)</span><br></pre></td></tr></table></figure>
+<p>比如上述代码，我就查看了soup中的第一个文本段和img元素</p>
+<p>但因为我们可能更需要的是网页中的每一个元素的价格或者书名啥的，所以我们呢可以f12打开看源代码，看看你想要的数据具体存在哪个元素中，是img，还是p或者是h123456。。。</p>
+<p>但是这也伴随着第二个难点的出现就是网站里肯定有很多其他的p类型，img类型或者h123456等等，如何过滤到其他你不想要的同类型元素只留下你需要的元素呢</p>
+<p>这就要利用他的其他的一些特点了，比如我们来看这个这个豆瓣电影top250的源代码<br><img src="/" alt="douban"><br>我们往下翻找就能看到，我想要的电影名之一：肖申克的救赎</p>
+<p>而我们发现了一个规律就是我们可以从每一个width为100的img类中找寻其中的alt元素来查找电影名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_movie=soup.findAll(<span class="string">&quot;img&quot;</span>,attrs=&#123;<span class="string">&quot;width&quot;</span>:<span class="string">&quot;100&quot;</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> movie <span class="keyword">in</span> all_movie:</span><br><span class="line">  <span class="built_in">print</span>(movie.get(<span class="string">&quot;alt&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>如果不想要显示一些奇奇怪怪的符号或者想要纯净的数据，可以试一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">douban.string<span class="comment">#伪代码，仅仅注释可以用.string的方法来访问纯净的数据</span></span><br></pre></td></tr></table></figure>
+<p>如果还有更多的操作要求，可以使用切片之类的方式来进行操作，或者现用现查一些函数，都是非常方便的</p>
+<p>以上基本的爬虫功能已经介绍结束，后面数据分析会在之后可能更新的爬虫进阶中介绍，作者要去准备这个杯那个杯了，再见我的朋友</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://bmx6132.github.io/">LNexaminee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://bmx6132.github.io/2025/10/30/Crawling/">http://bmx6132.github.io/2025/10/30/Crawling/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://bmx6132.github.io/img/les.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/10/30/Data_Structures/" title="不麻烦的数据结构"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">不麻烦的数据结构</div></div><div class="info-2"><div class="info-item-1">数据结构以及代码实现前言作者一直想要更新关于C语言方面的内容，奈何原本想更新的《速通C语言》在下手写的时候发现不是那么简单，毕竟C牵扯的太多了，小到hello...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://bmx6132.github.io/img/les.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">LNexaminee</div><div class="author-info-description">zypc24</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/bmx6132"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/bmx6132" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1603384860@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">❤❤小杨永露❤❤</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%E7%88%AC%E8%99%AB"><span class="toc-number">1.</span> <span class="toc-text">快速入门爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E7%AC%AC%E4%B8%80%E6%AD%A5%E2%80%94%E2%80%94%E8%8E%B7%E5%8F%96%E7%BD%91%E7%AB%99%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.</span> <span class="toc-text">爬虫第一步——获取网站内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%AC%E8%99%AB%E7%AC%AC%E4%BA%8C%E6%AD%A5%E2%80%94%E2%80%94%E8%A7%A3%E6%9E%90%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9"><span class="toc-number">1.3.</span> <span class="toc-text">爬虫第二步——解析网页内容</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/Crawling/" title="快速入门爬虫">快速入门爬虫</a><time datetime="2025-10-30T04:49:38.510Z" title="Created 2025-10-30 12:49:38">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/Data_Structures/" title="不麻烦的数据结构">不麻烦的数据结构</a><time datetime="2025-10-30T04:49:30.109Z" title="Created 2025-10-30 12:49:30">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/23/vmware/" title="VMware_ubuntu配置——freshman进来看">VMware_ubuntu配置——freshman进来看</a><time datetime="2025-08-22T18:11:26.560Z" title="Created 2025-08-23 02:11:26">2025-08-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/27/openpyxl/" title="OPENPYXL">OPENPYXL</a><time datetime="2025-05-27T10:47:06.360Z" title="Created 2025-05-27 18:47:06">2025-05-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By LNexaminee</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([href="/music/"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
